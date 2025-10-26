@@ -23,7 +23,7 @@ The system above is an extension of the circuit in Lab 3 Task 2 with a built-in 
 
 In Lab 1, you designed a serial signature analyzer that compress sequence of '1's and '0's to a 16-bit signature.  This circuit can be modified into a parallel signature analyzer that produces a unique signature for a 16-bit, instead of 1-bit, input using the circuit shown below.
 
-<p align="center"> <img src="diagrams/signature_16.jpg" width="1200" height="250"> </p><BR>
+<p align="center"> <img src="diagrams/signature_16.jpg" width="600" height="250"> </p><BR>
 
 This parallel signature analyzer circuit "merges" the 16-bit output values of the DUT to the LFSR Q outputs, and produces a signature for the entire contents of the SRAM.  
 
