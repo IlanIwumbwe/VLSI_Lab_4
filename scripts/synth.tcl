@@ -12,7 +12,7 @@
 #  JTAG.sv Programming_controller.sv GPIO.sv
 
 # Variable setup
-set _HDL_DIRECTORY ./SRC
+set _HDL_DIRECTORY ../rtl/
 set HDL_FILES [list memtest.sv counter.sv control.sv PRBS.sv]           ;# list of sources
 set DESIGN memtest                        ;# top-level module name
 
