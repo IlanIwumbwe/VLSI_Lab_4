@@ -168,5 +168,25 @@ Timing post-routed design with self-designed ram block returns
 ```
 
 
+area analysis.
 
+memory compiler memory:
+
+```
+==============================
+Floorplan/Placement Information
+==============================
+Total area of Standard cells: 5830.720 um^2  
+Total area of Standard cells(Subtracting Physical Cells): 1257.200 um^2
+```
+
+custom memory implementation:
+
+```
+==============================
+Floorplan/Placement Information
+==============================
+Total area of Standard cells: 18740.400 um^2  
+Total area of Standard cells(Subtracting Physical Cells): 9560.600 um^2
+```
 
