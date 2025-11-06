@@ -5,6 +5,8 @@
 
 ## Add signature generator
 
+This section implements a 32-bit parallel signature analyzer module that compresses SRAM output data by XORing it with a 32-bit LFSR to create a unique signature for built-in self-test (BIST) functionality.
+
 <img width="1027" height="379" alt="image" src="https://github.com/user-attachments/assets/750e14d5-30fc-413c-a886-34bdb6a8b32b" />
 
 ```sv
@@ -35,6 +37,8 @@ endmodule
 ```
 
 ## Modify NCVerilog testbench to check signatures
+
+This section modifies the testbench to compute the expected signature from the reference model and compare it with the DUT's signature output to verify correct operation.
 
 ```sv
 `timescale 1ns/1ps
@@ -131,6 +135,7 @@ endmodule
 
 ## Memory self-test in GTKWave
 
+This section shows the waveform verification of the self-test system, demonstrating the signature generation and comparison process during SRAM testing.
 
 <img width="739" height="151" alt="image" src="https://github.com/user-attachments/assets/2483d0a4-f1cf-4a8a-885e-abb877daa62b" />
 
@@ -138,55 +143,21 @@ endmodule
 
 ## Challenge: comparing memory compiler SRAM with register manual register implementation
 
+This section compares the performance and area characteristics of the TSMC memory compiler generated SRAM against a manually implemented register-based memory design.
 
+### Combined Timing and Area Analysis
 
-Timing the design post route using `timeDesign -postRoute` yields:
+| Metric | Memory Compiler SRAM | Custom Register-Based SRAM |
+|--------|---------------------|---------------------------|
+| **Timing (Post-Route)** | | |
+| WNS (ns) | -0.093 | 0.291 |
+| TNS (ns) | -0.941 | 0.000 |
+| Violating Paths | 17 | 0 |
+| All Paths | 133 | 683 |
+| **Area** | | |
+| Total Standard Cell Area (μm²) | 5,830.720 | 18,740.400 |
+| Area (Subtracting Physical Cells) (μm²) | 1,257.200 | 9,560.600 |
 
-
-```
-+--------------------+---------+---------+---------+
-|     Setup mode     |   all   | reg2reg | default |
-+--------------------+---------+---------+---------+
-|           WNS (ns):| -0.093  | -0.093  |  0.350  |
-|           TNS (ns):| -0.941  | -0.941  |  0.000  |
-|    Violating Paths:|   17    |   17    |    0    |
-|          All Paths:|   133   |   94    |   91    |
-+--------------------+---------+---------+---------+
-```
-
-Timing post-routed design with self-designed ram block returns
-
-```
-+--------------------+---------+---------+---------+
-|     Setup mode     |   all   | reg2reg | default |
-+--------------------+---------+---------+---------+
-|           WNS (ns):|  0.291  |  0.291  |  0.343  |
-|           TNS (ns):|  0.000  |  0.000  |  0.000  |
-|    Violating Paths:|    0    |    0    |    0    |
-|          All Paths:|   683   |   617   |   618   |
-+--------------------+---------+---------+---------+
-```
-
-
-area analysis.
-
-memory compiler memory:
-
-```
-==============================
-Floorplan/Placement Information
-==============================
-Total area of Standard cells: 5830.720 um^2  
-Total area of Standard cells(Subtracting Physical Cells): 1257.200 um^2
-```
-
-custom memory implementation:
-
-```
-==============================
-Floorplan/Placement Information
-==============================
-Total area of Standard cells: 18740.400 um^2  
-Total area of Standard cells(Subtracting Physical Cells): 9560.600 um^2
+The memory compiler generated SRAM is significantly more area-efficient (3.2× smaller) than the register-based implementation but has timing violations, while the custom register design meets all timing requirements but uses substantially more area and has more complex routing with 5× more signal paths.
 ```
 
