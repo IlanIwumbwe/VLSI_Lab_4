@@ -158,6 +158,4 @@ This section compares the performance and area characteristics of the TSMC memor
 | Total Standard Cell Area (μm²) | 5,830.720 | 18,740.400 |
 | Area (Subtracting Physical Cells) (μm²) | 1,257.200 | 9,560.600 |
 
-The memory compiler generated SRAM is significantly more area-efficient (3.2× smaller) than the register-based implementation but has timing violations, while the custom register design meets all timing requirements but uses substantially more area and has more complex routing with 5× more signal paths.
-```
-
+The memory compiler generated SRAM is significantly more area-efficient (3.2× smaller) than the register-based implementation but has timing violations, while the custom register design meets all timing requirements but uses substantially more area and has more complex routing.
